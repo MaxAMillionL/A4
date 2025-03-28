@@ -134,22 +134,27 @@ int main(void) {
   */
   assert(DT_insert("a/y") == SUCCESS);
   assert((temp = DT_toString()) != NULL);
+  fprintf(stderr, "Checkpoint Promotion:\n%s\n", temp);
   assert(!strcmp(temp,"a\na/y\n"));
   free(temp);
   assert(DT_insert("a/x") == SUCCESS);
   assert((temp = DT_toString()) != NULL);
+  fprintf(stderr, "Checkpoint Promotion:\n%s\n", temp);
   assert(!strcmp(temp,"a\na/x\na/y\n"));
   free(temp);
   assert(DT_rm("a/y") == SUCCESS);
   assert((temp = DT_toString()) != NULL);
+  fprintf(stderr, "Checkpoint Promotion:\n%s\n", temp);
   assert(!strcmp(temp,"a\na/x\n"));
   free(temp);
   assert(DT_insert("a/y2") == SUCCESS);
   assert((temp = DT_toString()) != NULL);
+  fprintf(stderr, "Checkpoint Promotion:\n%s\n", temp);
   assert(!strcmp(temp,"a\na/x\na/y2\n"));
   free(temp);
   assert(DT_insert("a/y2/GRAND1") == SUCCESS);
   assert((temp = DT_toString()) != NULL);
+  fprintf(stderr, "Checkpoint Promotion:\n%s\n", temp);
   assert(!strcmp(temp,"a\na/x\na/y2\na/y2/GRAND1\n"));
   free(temp);
   assert(DT_insert("a/y/Grand0") == SUCCESS);
