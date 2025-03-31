@@ -140,7 +140,7 @@ boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
    /* Now checks invariants recursively at each node from the root. */
 
    iSuccess = CheckerDT_treeCheck(oNRoot, precurCount);
-   if (*precurCount != ulCount)
+   if (iSuccess && *precurCount != ulCount)
    {
       fprintf(stderr, "The amount of nodes traversed through does not reflect the number of declared\n");
       return FALSE;
