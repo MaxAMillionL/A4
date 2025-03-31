@@ -70,6 +70,11 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *recurCount) {
          Node_T oNChild = NULL;
          int iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
 
+         if(iStatus != SUCCESS) {
+            fprintf(stderr, "getNumChildren claims more children than getChild returns\n");
+            return FALSE;
+         }
+
         if(ulIndex != 0){
             prevNodePath = Node_getPath(prevNode);
             currNodePath = Node_getPath(oNChild);
@@ -79,12 +84,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *recurCount) {
                 return FALSE;
             }
         }
-        prevNode = oNNode;
-
-         if(iStatus != SUCCESS) {
-            fprintf(stderr, "getNumChildren claims more children than getChild returns\n");
-            return FALSE;
-         }
+        prevNode = oNChild;
 
          /* if recurring down one subtree results in a failed check
             farther down, passes the failure back up immediately */
