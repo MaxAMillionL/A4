@@ -72,7 +72,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *recurCount) {
 
         if(ulIndex != 0){
             prevNodePath = Node_getPath(prevNode);
-            currNodePath = Node_getPath(oNNode);
+            currNodePath = Node_getPath(oNChild);
             
             if(Path_comparePath(prevNodePath, currNodePath) >= 0){
                 fprintf(stderr, "paths are not in lexicographic order\n");
