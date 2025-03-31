@@ -91,8 +91,9 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *recurCount) {
          if(!CheckerDT_treeCheck(oNChild, recurCount))
             return FALSE;
       }
+      (*recurCount)++;
    }
-   (*recurCount)++;
+   
    return TRUE;
 
 }
@@ -136,7 +137,6 @@ boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
    if (*precurCount != ulCount)
    {
       fprintf(stderr, "The amount of nodes traversed through does not reflect the number of declared\n");
-      fprintf(stderr, "recurcount: %zu    ulCount: %zu\n", *precurCount, ulCount);
       return FALSE;
    }
    return iSuccess;
