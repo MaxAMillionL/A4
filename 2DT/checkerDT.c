@@ -53,6 +53,9 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
 */
 static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *recurCount) {
    size_t ulIndex;
+   Node_T prevNode;
+   Path_T currNodePath;
+   Path_T prevNodePath;
 
    if(oNNode!= NULL) {
 
@@ -66,6 +69,17 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *recurCount) {
       {
          Node_T oNChild = NULL;
          int iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
+
+        if(ulIndex != 0){
+            prevNodePath = Node_getPath(prevNode);
+            currNodePath = Node_getPath(oNode);
+            
+            if(Path_comparePath(prevNodePath, currNodePath) >= 0){
+                fprintf(stderr, "paths are not in lexicographic order\n");
+                return FALSE;
+            }
+        }
+        prevNode = oNNode;
 
          if(iStatus != SUCCESS) {
             fprintf(stderr, "getNumChildren claims more children than getChild returns\n");
