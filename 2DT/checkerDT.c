@@ -74,11 +74,11 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *recurCount) {
 
          /* if recurring down one subtree results in a failed check
             farther down, passes the failure back up immediately */
-         if(!CheckerDT_treeCheck(oNChild, ulCount))
+         if(!CheckerDT_treeCheck(oNChild, recurCount))
             return FALSE;
       }
    }
-   *recurCount++;
+   (*recurCount)++;
    return TRUE;
 
 }
@@ -118,11 +118,11 @@ boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
     }
    /* Now checks invariants recursively at each node from the root. */
 
-   iSuccess = CheckerDT_treeCheck(oNRoot, ulCount);
+   iSuccess = CheckerDT_treeCheck(oNRoot, precurCount);
    if (*precurCount!=ulCount)
    {
       fprintf(stderr, "The amount of nodes traversed through does not reflect the number of declared\n");
-
+      return FALSE;
    }
    return iSuccess;
 
