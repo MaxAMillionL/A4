@@ -81,11 +81,11 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *recurCount) {
             currNodePath = Node_getPath(oNChild);
             
             if(Path_comparePath(prevNodePath, currNodePath) > 0){
-                fprintf(stderr, "paths are not in lexicographic order\n");
+                fprintf(stderr, "Two paths are not in lexicographic order in directory\n");
                 return FALSE;
             }
             if(Path_comparePath(prevNodePath, currNodePath) == 0){
-                fprintf(stderr, "two children with same name\n");
+                fprintf(stderr, "Two children with same name in directory\n");
                 return FALSE;
             }
         }
@@ -142,7 +142,7 @@ boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
    iSuccess = CheckerDT_treeCheck(oNRoot, precurCount);
    if (iSuccess && *precurCount != ulCount)
    {
-      fprintf(stderr, "The amount of nodes traversed through does not reflect the number of declared\n");
+      fprintf(stderr, "The amount of nodes traversed through does not reflect the number of nodes declared\n");
       return FALSE;
    } 
    return iSuccess; 
