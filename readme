@@ -120,7 +120,12 @@ regulations.
 Student 1: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
+I found this assignment to be helpful to show real world applications,
+but is it really true that we would not have access to the c code?
 
+I feel like part 1 of the assignment was closer to the truth except for
+being given a working implementation. I would rather be exposed to a ton
+of c code and then debug it myself then just be given the object files.
 
 ------------------------------------------------------------------------
 Student 2: What is your assessment of the assignment? Was it helpful?
@@ -133,7 +138,9 @@ Was it fun?
 will help your grader to grade it in the most favorable light? In
 particular, what bugs are in your submission?
 
-
+When debugging with the checkerDT for part 2, if there is an error
+about paths being out of order and of the same name, the out of order
+error takes precedence.
 
 ------------------------------------------------------------------------
 What warnings does splint generate for Part 2's checker, and what are
