@@ -220,18 +220,8 @@ is copy pasted above, and that is a redundancy where stylistically the
 function comment should only be in one place. Along with this, in 
 nodeDTGood, it would be good stylistically if there were comments 
 breaking up the functions with /*---*/.
-    
-- missing assert statements?
-- making sure the function comments aren't in in the .c and .h file
 
-
-     are any functions never used ?
-
-
-can you combine any functions?
-
-
-helper function if anything is repeated?
+There should also be some sort of modularity for the beginning error checks, that being to see if the tree is initialized, if it has so many nodes (aka its size), or if certain nodes are not NULL,
 
 
 ------------------------------------------------------------------------
