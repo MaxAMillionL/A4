@@ -142,7 +142,7 @@ boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
    iSuccess = CheckerDT_treeCheck(oNRoot, precurCount);
    if (iSuccess && *precurCount != ulCount)
    {
-      fprintf(stderr, "The amount of nodes traversed through does not reflect the number of nodes declared\n");
+      fprintf(stderr, "The amount of nodes traversed through does not reflect the number of nodes present currently\n");
       return FALSE;
    } 
    return iSuccess; 
