@@ -45,7 +45,8 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
 /*
    Performs a pre-order traversal of the tree rooted at oNNode.
    Returns FALSE if a broken invariant is found and
-   returns TRUE otherwise.
+   returns TRUE otherwise. Keeps track of how many nodes are touched 
+   through pointer *recurCount.
 
    You may want to change this function's return type or
    parameter list to facilitate constructing your checks.
@@ -56,6 +57,8 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *recurCount) {
    Node_T prevNode;
    Path_T currNodePath;
    Path_T prevNodePath;
+
+   assert(recurCount != NULL);
 
    if(oNNode!= NULL) {
 
