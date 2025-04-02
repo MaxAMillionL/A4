@@ -198,32 +198,28 @@ the error manifests itself or is "noticed" by the client.
 ------------------------------------------------------------------------
 What are your critiques of the given DT implementations, as
 specified in Step 2.5?
-A critique we have is instead of incorporating the error checks within each
-function. We can create an error check function that will be called at the
-end of each function to improve modularity. - no because some error checks
-happens mid function but a comment that specifies an error check
 
-
-A second critique would be moving all of the "auxiliary functions" that
+One critique would be moving all of the "auxiliary functions" that
 are used for generating the string representation of the DT to their own
-module due to the already length of the module and all of its
-developmental functions.
+module due to the already long length of the module and all of its
+developmental functions. This would help reduce line count and increase 
+redability.
 
-
-there should be overall more comments within the function
-that specifies the logic if the action within the function isn't
-necessarily defined in the function comment. For example, in dt traverse
-path function we start the for loop with i=2. This may confuse someone
-reading the code because it wasn't specified that the reasoning
-behind this was we are starting by looking at the second node
+Also, there should be overall more comments within the function
+that specifies the logic of the action within the function. It isn't
+necessarily defined in the function comment already. For example, in 
+the DT_traversePath() function we start the for loop with i=2. This may 
+confuse someone reading the code because it wasn't specified that the 
+reasoning behind this was we are starting by looking at the second node 
 since we have already made sure the root is not null and initialized.
-
 
 There are some moments where the function comment is specified in the
 header file which is repeated in the implementation .c file. There is an
 example in nodedtGood.c file where the same comment in the .h file that
 is copy pasted above, and that is a redundancy where stylistically the 
-function comment should only be in one place. 
+function comment should only be in one place. Along with this, in 
+nodeDTGood, it would be good stylistically if there were comments 
+breaking up the functions with /*---*/.
     
 - missing assert statements?
 - making sure the function comments aren't in in the .c and .h file
