@@ -135,8 +135,8 @@ boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
             fprintf(stderr, "Root is null, but size is not 0\n");
             return FALSE;
         }
-        if(oNRoot != NULL && ulCount < 0){
-            fprintf(stderr, "Tree has nodes, but size is less than or equal to 0\n");
+        if(oNRoot != NULL && ulCount == 0){
+            fprintf(stderr, "Tree has nodes, but size is 0\n");
             return FALSE;
         }
     }
