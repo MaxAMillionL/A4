@@ -78,7 +78,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *recurCount) {
             return FALSE;
          }
 
-        prevNode = oNChild;
+        
         if(ulIndex != 0){
             prevNodePath = Node_getPath(prevNode);
             currNodePath = Node_getPath(oNChild);
@@ -92,6 +92,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *recurCount) {
                 return FALSE;
             }
         }
+        prevNode = oNChild;
         
         
 
