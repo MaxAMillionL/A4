@@ -198,7 +198,9 @@ the error manifests itself or is "noticed" by the client.
 ------------------------------------------------------------------------
 What are your critiques of the given DT implementations, as
 specified in Step 2.5?
-
+A critque we have is instead of incorporating the error checks within each
+function. We can create an eror check function that will be called at the 
+end of each function to improve modularity. 
 
 
 ------------------------------------------------------------------------
