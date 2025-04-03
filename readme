@@ -222,7 +222,14 @@ breaking up the functions with /*---*/.
 
 There should also be some sort of modularity for the beginning error 
 checks, that being to see if the tree is initialized, if it has so many 
-nodes (aka its size), or if certain nodes are not NULL. This can be contained in a single static function instead.
+nodes (aka its size), or if certain nodes are not NULL. This can be 
+contained in a single static function instead.
+
+For style, at the beginning of a lot of DT functions, there is 
+intialization of variables by giving them values instead of just 
+declaring them. This is against what the critique checkers have for our 
+own code, and should instead declare every variable and then give it an 
+initial value.
 
 
 ------------------------------------------------------------------------
