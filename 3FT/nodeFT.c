@@ -8,6 +8,7 @@
 #include <string.h>
 #include "dynarray.h"
 #include "nodeFT.h"
+#include "a4def.h"
 
 /* A node in a FT */
 struct node {
@@ -15,18 +16,21 @@ struct node {
    Path_T oPPath;
    /* this node's parent */
    Node_T oNParent;
-   /* the object containing links to this node's children */
+   /* the object containing links to this node's directory children */
    DynArray_T oDChildren;
+   /* the object containing links to this node's file children */
+   DynArray_T oFChildren;
 };
 
 
 /*
-  Links new child oNChild into oNParent's children array at index
-  ulIndex. Returns SUCCESS if the new child was added successfully,
-  or  MEMORY_ERROR if allocation fails adding oNChild to the array.
+  Links new child oNChild into oNParent's children Directory array at 
+  index ulIndex. Returns SUCCESS if the new child was added 
+  successfully, or  MEMORY_ERROR if allocation fails adding oNChild to 
+  the array.
 */
-static int Node_addChild(Node_T oNParent, Node_T oNChild,
-                         size_t ulIndex) {
+static int Node_addDChild(Node_T oNParent, Node_T oNChild,
+   size_t ulIndex) {
    assert(oNParent != NULL);
    assert(oNChild != NULL);
 
@@ -34,6 +38,23 @@ static int Node_addChild(Node_T oNParent, Node_T oNChild,
       return SUCCESS;
    else
       return MEMORY_ERROR;
+}
+
+
+/*
+  Links new child oNChild into oNParent's children File array at index
+  ulIndex. Returns SUCCESS if the new child was added successfully,
+  or  MEMORY_ERROR if allocation fails adding oNChild to the array.
+*/
+static int Node_addFChild(Node_T oNParent, Node_T oNChild,
+    size_t ulIndex) {
+    assert(oNParent != NULL);
+    assert(oNChild != NULL);
+
+    if(DynArray_addAt(oNParent->oFChildren, ulIndex, oNChild))
+            return SUCCESS;
+    else
+    return MEMORY_ERROR;
 }
 
 /*
@@ -62,7 +83,8 @@ static int Node_compareString(const Node_T oNFirst,
                  or oNParent is NULL but oPPath is not of depth 1
   * ALREADY_IN_TREE if oNParent already has a child with this path
 */
-int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult) {
+int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, 
+   boolean type) {
    struct node *psNew;
    Path_T oPParentPath = NULL;
    Path_T oPNewPath = NULL;
@@ -142,14 +164,33 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult) {
       return MEMORY_ERROR;
    }
 
+   psNew->oFChildren = DynArray_new(0);
+   if(psNew->oFChildren == NULL) {
+      Path_free(psNew->oPPath);
+      free(psNew);
+      *poNResult = NULL;
+      return MEMORY_ERROR;
+   }
+
    /* Link into parent's children list */
    if(oNParent != NULL) {
-      iStatus = Node_addChild(oNParent, psNew, ulIndex);
-      if(iStatus != SUCCESS) {
-         Path_free(psNew->oPPath);
-         free(psNew);
-         *poNResult = NULL;
-         return iStatus;
+      if(type = TRUE){
+         iStatus = Node_addDChild(oNParent, psNew, ulIndex);
+         if(iStatus != SUCCESS) {
+            Path_free(psNew->oPPath);
+            free(psNew);
+            *poNResult = NULL;
+            return iStatus;
+         }
+      }
+      else{
+         iStatus = Node_addFChild(oNParent, psNew, ulIndex);
+         if(iStatus != SUCCESS) {
+            Path_free(psNew->oPPath);
+            free(psNew);
+            *poNResult = NULL;
+            return iStatus;
+         }
       }
    }
 
