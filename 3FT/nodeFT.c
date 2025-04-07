@@ -17,6 +17,11 @@ struct node {
    Node_T oNParent;
    /* the object containing links to this node's children */
    DynArray_T oDChildren;
+
+   void * filecontents;
+   size_t length;
+   boolean nodetype;
+
 };
 
 
