@@ -288,7 +288,8 @@ int FT_rmDir(const char *pcPath) {
    return SUCCESS;
 }
 
-int FT_insertFile(const char *pcPath) {
+int FT_insertFile(const char *pcPath, void *pvContents,
+   size_t ulLength) {
    int iStatus;
    Path_T oPPath = NULL;
    Node_T oNFirstNew = NULL;
@@ -412,19 +413,19 @@ int FT_rmFile(const char *pcPath) {
 }
 
 void *FT_getFileContents(const char *pcPath){
-
+   void* pointer;
+   return pointer;
 }
 
 void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
    size_t ulNewLength){
-
+   void* pointer;
+   return pointer;
 }
 
 int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
    return 0;
 }
-
-
 
 int FT_init(void) {
    assert(CheckerFT_isValid(bIsInitialized, oNRoot, ulCount));
