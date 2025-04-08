@@ -291,6 +291,10 @@ int FT_rmDir(const char *pcPath) {
    if(iStatus != SUCCESS)
        return iStatus;
 
+   if(Node_type(oNFound) == FALSE){
+      return NOT_A_DIRECTORY;
+   }
+
    ulCount -= Node_free(oNFound);
    if(ulCount == 0)
       oNRoot = NULL;
@@ -437,6 +441,10 @@ int FT_rmFile(const char *pcPath) {
 
    if(iStatus != SUCCESS)
        return iStatus;
+
+   if(Node_type(oNFound) == TRUE){
+      return NOT_A_FILE;
+   }
 
    ulCount -= Node_free(oNFound);
    if(ulCount == 0)
