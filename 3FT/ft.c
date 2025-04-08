@@ -269,7 +269,6 @@ boolean FT_contains(const char *pcPath) {
 }
 
 
-
 int FT_insertfile(const char *pcPath, void *pvContents,
                   size_t ulLength) {
    int iStatus;
@@ -362,16 +361,6 @@ int FT_insertfile(const char *pcPath, void *pvContents,
 
    assert(CheckerFT_isValid(bIsInitialized, oNRoot, ulCount));
    return SUCCESS;
-}
-
-boolean FT_contains(const char *pcPath) {
-   int iStatus;
-   Node_T oNFound = NULL;
-
-   assert(pcPath != NULL);
-
-   iStatus = FT_findNode(pcPath, &oNFound);
-   return (boolean) (iStatus == SUCCESS);
 }
 
 int FT_rm(const char *pcPath) {
