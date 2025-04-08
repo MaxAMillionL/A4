@@ -20,7 +20,7 @@ struct node {
    DynArray_T oDChildren;
    /* the objects file contents (if a file) */
    void * filecontents;
-   /* */
+   /* length of the file */
    size_t length;
    /* FALSE for file, TRUE for directory */
    boolean nodetype;
