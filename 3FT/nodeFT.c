@@ -31,7 +31,7 @@ struct node {
 /*
   Links new child oNChild into oNParent's children array at index
   ulIndex. Returns SUCCESS if the new child was added successfully,
-  or  MEMORY_ERROR if allocation fails adding oNChild to the array.
+  or  MEMORY_ERROR if allocation fails adding oNChild to the array. Returns NOT_A_DIRECTORY if oNParent is a file.
 */
 static int Node_addChild(Node_T oNParent, Node_T oNChild,
                          size_t ulIndex) {
@@ -74,7 +74,7 @@ static int Node_compareString(const Node_T oNFirst,
                  or oNParent is NULL but oPPath is not of depth 1
   * ALREADY_IN_TREE if oNParent already has a child with this path
 */
-int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult) {
+int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, nType type) {
    struct node *psNew;
    Path_T oPParentPath = NULL;
    Path_T oPNewPath = NULL;
@@ -153,6 +153,12 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult) {
       *poNResult = NULL;
       return MEMORY_ERROR;
    }
+   psNew->nodetype = type;
+   psNew->filecontents = NULL;
+   if(type == FILE){
+      /* Add contents with parameter*/
+   }
+   /* add length intialization*/
 
    /* Link into parent's children list */
    if(oNParent != NULL) {
