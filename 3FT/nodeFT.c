@@ -275,7 +275,7 @@ char *Node_toString(Node_T oNNode) {
       return strcpy(copyPath, Path_getPathname(Node_getPath(oNNode)));
 }
 
-/*----------------------------------------------------------------------*/
+/*--------------------------------------------------------------------*/
 boolean Node_type(Node_T oNNode){
    return oNNode->nodetype;
 }

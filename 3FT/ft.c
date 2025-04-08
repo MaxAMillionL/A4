@@ -234,7 +234,7 @@ int FT_insertDir(const char *pcPath) {
       }
 
       /* insert the new node for this level */
-      iStatus = Node_new(oPPrefix, oNCurr, &oNNewNode);
+      iStatus = Node_new(oPPrefix, oNCurr, &oNNewNode); /* We need to make this Node_newDir()*/
       if(iStatus != SUCCESS) {
          Path_free(oPPath);
          Path_free(oPPrefix);
@@ -272,7 +272,9 @@ boolean FT_containsDir(const char *pcPath) {
    assert(pcPath != NULL);
 
    iStatus = FT_findNode(pcPath, &oNFound);
-   return (boolean) (iStatus == SUCCESS);
+
+   /* makes sure the node exists and is a directory */
+   return (boolean) (iStatus == SUCCESS) && (Node_type(oNFound) == TRUE);
 }
 
 /*--------------------------------------------------------------------*/
@@ -309,7 +311,6 @@ int FT_insertFile(const char *pcPath, void *pvContents,
    size_t ulNewNodes = 0;
 
    assert(pcPath != NULL);
-   
 
    /* validate pcPath and generate a Path_T for it */
    if(!bIsInitialized)
@@ -326,6 +327,12 @@ int FT_insertFile(const char *pcPath, void *pvContents,
       Path_free(oPPath);
       return iStatus;
    }
+   
+   /* check to see if oNCurr is a file */
+   if(Node_type(oNCurr) == FALSE) {
+      Path_free(oPPath);
+      return NOT_A_DIRECTORY;
+   }
 
    /* no ancestor node found, so if root is not NULL,
       pcPath isn't underneath root. */
@@ -335,8 +342,10 @@ int FT_insertFile(const char *pcPath, void *pvContents,
    }
 
    ulDepth = Path_getDepth(oPPath);
-   if(oNCurr == NULL) /* new root! */
+   if(oNCurr == NULL){ /* new root! */
       ulIndex = 1;
+      return BAD_PATH;
+   }
    else {
       ulIndex = Path_getDepth(Node_getPath(oNCurr))+1;
 
@@ -364,7 +373,12 @@ int FT_insertFile(const char *pcPath, void *pvContents,
       }
 
       /* insert the new node for this level */
-      iStatus = Node_new(oPPrefix, oNCurr, &oNNewNode);
+      if(ulIndex==ulDepth){
+         iStatus = Node_new(oPPrefix, oNCurr, &oNNewNode); /* We need to make this Node_newFile()*/
+      }
+      else{
+         iStatus = Node_new(oPPrefix, oNCurr, &oNNewNode); /* We need to make this Node_newDir()*/
+      }
       if(iStatus != SUCCESS) {
          Path_free(oPPath);
          Path_free(oPPrefix);
@@ -382,6 +396,9 @@ int FT_insertFile(const char *pcPath, void *pvContents,
          oNFirstNew = oNCurr;
       ulIndex++;
    }
+
+
+
 
    Path_free(oPPath);
    /* update FT state variables to reflect insertion */
@@ -402,7 +419,9 @@ boolean FT_containsFile(const char *pcPath) {
    assert(pcPath != NULL);
 
    iStatus = FT_findNode(pcPath, &oNFound);
-   return (boolean) (iStatus == SUCCESS);
+
+   /* makes sure the node exists and is a directory */
+   return (boolean) (iStatus == SUCCESS) && (Node_type(oNFound) == FALSE);
 }
 
 /*--------------------------------------------------------------------*/
