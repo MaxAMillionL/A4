@@ -1,6 +1,6 @@
 #--------------------------------------------------------------------
 # Makefile for Assignment 4, Part 2
-# dt* targets are built using checkerDT
+# ft* targets are built using checkerDT
 # rules to build dtBad*.o and nodeBad*.o from source will fail
 # Author: Christopher Moretti
 #--------------------------------------------------------------------
