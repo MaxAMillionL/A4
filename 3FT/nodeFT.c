@@ -83,7 +83,7 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult) {
    int iStatus;
 
    assert(oPPath != NULL);
-   assert(oNParent == NULL || CheckerFT_Node_isValid(oNParent));
+   assert(oNParent == NULL);
 
    /* allocate space for a new node */
    psNew = malloc(sizeof(struct node));
@@ -173,8 +173,7 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult) {
 
    *poNResult = psNew;
 
-   assert(oNParent == NULL || CheckerFT_Node_isValid(oNParent));
-   assert(CheckerFT_Node_isValid(*poNResult));
+   assert(oNParent == NULL);
 
    return SUCCESS;
 }
@@ -184,7 +183,6 @@ size_t Node_free(Node_T oNNode) {
    size_t ulCount = 0;
 
    assert(oNNode != NULL);
-   assert(CheckerFT_Node_isValid(oNNode));
 
    /* remove from parent's list */
    if(oNNode->oNParent != NULL) {
