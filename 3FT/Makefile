@@ -33,5 +33,5 @@ ft_client.o: ft_client.c ft.h a4def.h
 nodeFT.o: nodeFT.c dynarray.h nodeFT.h path.h a4def.h
 	$(GCC) -g -c $<
 
-ft.o: dtGood.c dynarray.h nodeFT.h ft.h path.h a4def.h
+ft.o: ft.c dynarray.h nodeFT.h ft.h path.h a4def.h
 	$(GCC) -g -c $<
