@@ -174,7 +174,6 @@ int FT_insertDir(const char *pcPath) {
    size_t ulNewNodes = 0;
 
    assert(pcPath != NULL);
-   
 
    /* validate pcPath and generate a Path_T for it */
    if(!bIsInitialized)
@@ -190,6 +189,12 @@ int FT_insertDir(const char *pcPath) {
    {
       Path_free(oPPath);
       return iStatus;
+   }
+   
+   /* check to see if oNCurr is a file */
+   if(Node_type(oNCurr) == FALSE) {
+      Path_free(oPPath);
+      return NOT_A_DIRECTORY;
    }
 
    /* no ancestor node found, so if root is not NULL,

@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------*/
 /* nodeFT.c                                                           */
-/* Author: Christopher Moretti                                        */
+/* Author: Maxwell Lloyd and Venus Dinari                             */
 /*--------------------------------------------------------------------*/
 
 #include <stdlib.h>
@@ -24,7 +24,6 @@ struct node {
    size_t length;
    /* FALSE for file, TRUE for directory */
    boolean nodetype;
-
 };
 
 
@@ -274,4 +273,9 @@ char *Node_toString(Node_T oNNode) {
       return NULL;
    else
       return strcpy(copyPath, Path_getPathname(Node_getPath(oNNode)));
+}
+
+/*----------------------------------------------------------------------*/
+boolean Node_type(Node_T oNNode){
+   return oNNode->nodetype;
 }
