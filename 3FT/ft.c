@@ -162,8 +162,8 @@ static int FT_findNode(const char *pcPath, Node_T *poNResult) {
    *poNResult = oNFound;
    return SUCCESS;
 }
-/*--------------------------------------------------------------------*/
 
+/*--------------------------------------------------------------------*/
 
 int FT_insertDir(const char *pcPath) {
    int iStatus;
@@ -258,6 +258,8 @@ int FT_insertDir(const char *pcPath) {
    return SUCCESS;
 }
 
+/*--------------------------------------------------------------------*/
+
 boolean FT_containsDir(const char *pcPath) {
    int iStatus;
    Node_T oNFound = NULL;
@@ -267,6 +269,8 @@ boolean FT_containsDir(const char *pcPath) {
    iStatus = FT_findNode(pcPath, &oNFound);
    return (boolean) (iStatus == SUCCESS);
 }
+
+/*--------------------------------------------------------------------*/
 
 int FT_rmDir(const char *pcPath) {
    int iStatus;
@@ -287,6 +291,8 @@ int FT_rmDir(const char *pcPath) {
    
    return SUCCESS;
 }
+
+/*--------------------------------------------------------------------*/
 
 int FT_insertFile(const char *pcPath, void *pvContents,
    size_t ulLength) {
@@ -382,6 +388,8 @@ int FT_insertFile(const char *pcPath, void *pvContents,
    return SUCCESS;
 }
 
+/*--------------------------------------------------------------------*/
+
 boolean FT_containsFile(const char *pcPath) {
    int iStatus;
    Node_T oNFound = NULL;
@@ -391,6 +399,8 @@ boolean FT_containsFile(const char *pcPath) {
    iStatus = FT_findNode(pcPath, &oNFound);
    return (boolean) (iStatus == SUCCESS);
 }
+
+/*--------------------------------------------------------------------*/
 
 int FT_rmFile(const char *pcPath) {
    int iStatus;
@@ -412,10 +422,14 @@ int FT_rmFile(const char *pcPath) {
    return SUCCESS;
 }
 
+/*--------------------------------------------------------------------*/
+
 void *FT_getFileContents(const char *pcPath){
    void* pointer;
    return pointer;
 }
+
+/*--------------------------------------------------------------------*/
 
 void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
    size_t ulNewLength){
@@ -423,13 +437,15 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
    return pointer;
 }
 
+/*--------------------------------------------------------------------*/
+
 int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
    return 0;
 }
 
-int FT_init(void) {
-   
+/*--------------------------------------------------------------------*/
 
+int FT_init(void) {
    if(bIsInitialized)
       return INITIALIZATION_ERROR;
 
@@ -440,6 +456,8 @@ int FT_init(void) {
    
    return SUCCESS;
 }
+
+/*--------------------------------------------------------------------*/
 
 int FT_destroy(void) {
    
