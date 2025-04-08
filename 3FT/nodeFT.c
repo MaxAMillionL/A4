@@ -23,7 +23,7 @@ struct node {
    /* */
    size_t length;
    /* FALSE for file, TRUE for directory */
-   nType nodetype;
+   boolean nodetype;
 
 };
 
@@ -38,7 +38,7 @@ static int Node_addChild(Node_T oNParent, Node_T oNChild,
    assert(oNParent != NULL);
    assert(oNChild != NULL);
 
-   if(oNParent->nodetype == FILE){
+   if(oNParent->nodetype == FALSE){
       return NOT_A_DIRECTORY;
    }
 
@@ -74,7 +74,8 @@ static int Node_compareString(const Node_T oNFirst,
                  or oNParent is NULL but oPPath is not of depth 1
   * ALREADY_IN_TREE if oNParent already has a child with this path
 */
-int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, nType type) {
+int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, 
+   boolean type) {
    struct node *psNew;
    Path_T oPParentPath = NULL;
    Path_T oPNewPath = NULL;
@@ -155,7 +156,7 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, nType type) {
    }
    psNew->nodetype = type;
    psNew->filecontents = NULL;
-   if(type == FILE){
+   if(type == FALSE){
       /* Add contents with parameter*/
    }
    /* add length intialization*/
