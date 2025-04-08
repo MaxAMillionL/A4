@@ -9,6 +9,7 @@
 #include "dynarray.h"
 #include "nodeFT.h"
 
+
 /* A node in a FT */
 struct node {
    /* the object corresponding to the node's absolute path */
@@ -17,10 +18,12 @@ struct node {
    Node_T oNParent;
    /* the object containing links to this node's children */
    DynArray_T oDChildren;
-
+   /* the objects file contents (if a file) */
    void * filecontents;
+   /* */
    size_t length;
-   boolean nodetype;
+   /* FALSE for file, TRUE for directory */
+   nType nodetype;
 
 };
 
@@ -34,6 +37,10 @@ static int Node_addChild(Node_T oNParent, Node_T oNChild,
                          size_t ulIndex) {
    assert(oNParent != NULL);
    assert(oNChild != NULL);
+
+   if(oNParent->nodetype == FILE){
+      return NOT_A_DIRECTORY;
+   }
 
    if(DynArray_addAt(oNParent->oDChildren, ulIndex, oNChild))
       return SUCCESS;
