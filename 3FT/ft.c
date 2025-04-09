@@ -327,6 +327,10 @@ int FT_insertFile(const char *pcPath, void *pvContents,
    if(iStatus != SUCCESS)
       return iStatus;
 
+   if(oNRoot == NULL){
+      return CONFLICTING_PATH;
+   }
+
    /* find the closest ancestor of oPPath already in the tree */
    iStatus= FT_traversePath(oPPath, &oNCurr);
    if(iStatus != SUCCESS)
@@ -351,7 +355,6 @@ int FT_insertFile(const char *pcPath, void *pvContents,
    ulDepth = Path_getDepth(oPPath);
    if(oNCurr == NULL){ /* new root! */
       ulIndex = 1;
-      return CONFLICTING_PATH;
    }
    else {
       ulIndex = Path_getDepth(Node_getPath(oNCurr))+1;
