@@ -652,7 +652,18 @@ static size_t FT_preOrderTraversal(Node_T n, DynArray_T d, size_t i) {
          Node_T oNChild = NULL;
          iStatus = Node_getChild(n,c, &oNChild);
          assert(iStatus == SUCCESS);
-         i = FT_preOrderTraversal(oNChild, d, i);
+         if(Node_type(n) == TRUE){
+            i = FT_preOrderTraversal(oNChild, d, i);
+         }
+      }
+      for(c = 0; c < Node_getNumChildren(n); c++) {
+         int iStatus;
+         Node_T oNChild = NULL;
+         iStatus = Node_getChild(n,c, &oNChild);
+         assert(iStatus == SUCCESS);
+         if(Node_type(n) == FALSE){
+            i = FT_preOrderTraversal(oNChild, d, i);
+         }
       }
    }
    return i;
