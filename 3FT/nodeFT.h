@@ -15,7 +15,7 @@
 typedef struct node *Node_T;
 
 /*
-  Creates a new node in the Directory Tree, with path oPPath and
+  Creates a new Dir in the Directory Tree, with path oPPath and
   parent oNParent. Returns an int SUCCESS status and sets *poNResult
   to be the new node if successful. Otherwise, sets *poNResult to NULL
   and returns status:
@@ -26,7 +26,23 @@ typedef struct node *Node_T;
                  or oNParent is NULL but oPPath is not of depth 1
   * ALREADY_IN_TREE if oNParent already has a child with this path
 */
-int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult);
+int Node_newDir(Path_T oPPath, Node_T oNParent, Node_T *poNResult);
+
+
+/*
+  Creates a new File in the Directory Tree, with path oPPath and
+  parent oNParent. Gives the file to have value contents and with 
+  length ulLength. Returns an int SUCCESS status and sets *poNResult
+  to be the new node if successful. Otherwise, sets *poNResult to NULL
+  and returns status:
+  * MEMORY_ERROR if memory could not be allocated to complete request
+  * CONFLICTING_PATH if oNParent's path is not an ancestor of oPPath
+  * NO_SUCH_PATH if oPPath is of depth 0
+                 or oNParent's path is not oPPath's direct parent
+                 or oNParent is NULL but oPPath is not of depth 1
+  * ALREADY_IN_TREE if oNParent already has a child with this path
+*/
+int Node_newFile(Path_T oPPath, Node_T oNParent, Node_T *poNResult, void* contents, size_t ulLength);
 
 /*
   Destroys and frees all memory allocated for the subtree rooted at
@@ -88,4 +104,23 @@ char *Node_toString(Node_T oNNode);
    Returns the type of the given node oNNode, FALSE for a file and TRUE for a directory
 */
 boolean Node_type(Node_T oNNode);
+
+/*
+   Returns the length of the data in oNNode
+*/
+boolean Node_len(Node_T oNNode);
+
+/*
+   Returns the data located in onNode only if it is a file.
+*/
+void* Node_data(Node_T oNNode);
+
+
+/*
+   Takes the data information from newData and changes oNNode's data to match.
+*/
+void Node_changeData(Node_T oNNode, void* newData)
+
+
+
 #endif

@@ -234,7 +234,7 @@ int FT_insertDir(const char *pcPath) {
       }
 
       /* insert the new node for this level */
-      iStatus = Node_new(oPPrefix, oNCurr, &oNNewNode); /* We need to make this Node_newDir()*/
+      iStatus = Node_newDir(oPPrefix, oNCurr, &oNNewNode); /* We need to make this Node_newDir()*/
       if(iStatus != SUCCESS) {
          Path_free(oPPath);
          Path_free(oPPrefix);
@@ -378,7 +378,7 @@ int FT_insertFile(const char *pcPath, void *pvContents,
 
       /* insert the new node for this level */
       if(ulIndex==ulDepth){
-         iStatus = Node_new(oPPrefix, oNCurr, &oNNewNode); /* We need to make this Node_newFile()*/
+         iStatus = Node_newFile(oPPrefix, oNCurr, &oNNewNode, pvContents, ulLength); /* We need to make this Node_newFile()*/
       }
       else{
          iStatus = Node_new(oPPrefix, oNCurr, &oNNewNode); /* We need to make this Node_newDir()*/
@@ -457,22 +457,141 @@ int FT_rmFile(const char *pcPath) {
 /*--------------------------------------------------------------------*/
 
 void *FT_getFileContents(const char *pcPath){
-   void* pointer;
-   return pointer;
+   int iStatus;
+   Node_T oNCurr;
+   size_t ulDepth;
+   size_t ulIndex;
+   Path_T oPPath;
+
+   assert(pcPath != NULL);
+
+   /* Defensive copy */
+   iStatus = Path_dup(pcPath, oPPath);
+   if(iStatus != SUCCESS)
+   {
+      Path_free(oPPath);
+      return NULL;
+   }
+
+   /* Store last node of pcPath into oNCurr*/
+   iStatus = FT_traversePath(pcPath, oNCurr);
+   if(iStatus != SUCCESS)
+   {
+      Path_free(oPPath);
+      return NULL;
+   }
+
+   /* Make sure oNCurr is not a directory*/
+   if(Node_type(oNCurr) == TRUE){
+      Path_free(oPPath);
+      return NULL;
+   }
+
+   /* Confirm oNCurr is last node of pcPath */
+   if(Path_comparePath(Node_getPath(oNCurr), oPPath) != 0){
+      Path_free(oPPath);
+      return NULL;
+   }
+
+   /* Need to access oNCurrs contents*/
+   Path_free(oPPath);
+   return Node_data(oNCurr);
 }
 
 /*--------------------------------------------------------------------*/
 
 void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
    size_t ulNewLength){
-   void* pointer;
-   return pointer;
+      int iStatus;
+      void* oldContents;
+      Node_T oNCurr;
+      size_t ulDepth;
+      size_t ulIndex;
+      Path_T oPPath;
+   
+      assert(pcPath != NULL);
+   
+      /* Defensive copy */
+      iStatus = Path_dup(pcPath, oPPath);
+      if(iStatus != SUCCESS)
+      {
+         Path_free(oPPath);
+         return NULL;
+      }
+   
+      /* Store last node of pcPath into oNCurr*/
+      iStatus = FT_traversePath(pcPath, oNCurr);
+      if(iStatus != SUCCESS)
+      {
+         Path_free(oPPath);
+         return NULL;
+      }
+   
+      /* Make sure oNCurr is not a directory*/
+      if(Node_type(oNCurr) == TRUE){
+         Path_free(oPPath);
+         return NULL;
+      }
+   
+      /* Confirm oNCurr is last node of pcPath */
+      if(Path_comparePath(Node_getPath(oNCurr), oPPath) != 0){
+         Path_free(oPPath);
+         return NULL;
+      }
+   
+      /* Need to access oNCurrs contents*/
+      Path_free(oPPath);
+      oldContents = Node_data(oNCurr);
+      Node_changeData(oNCurr, pvNewContents, ulNewLength);
 }
 
 /*--------------------------------------------------------------------*/
 
 int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
-   return 0;
+   int iStatus;
+   void* oldContents;
+   Node_T oNCurr;
+   size_t ulDepth;
+   size_t ulIndex;
+   Path_T oPPath;
+
+   assert(pcPath != NULL);
+
+   /* Defensive copy */
+   iStatus = Path_dup(pcPath, oPPath);
+   if(iStatus != SUCCESS)
+   {
+      Path_free(oPPath);
+      return NULL;
+   }
+
+   /* Store last node of pcPath into oNCurr*/
+   iStatus = FT_traversePath(pcPath, oNCurr);
+   if(iStatus != SUCCESS)
+   {
+      Path_free(oPPath);
+      return NULL;
+   }
+
+   /* Make sure oNCurr is not a directory*/
+   if(Node_type(oNCurr) == TRUE){
+      Path_free(oPPath);
+      return NULL;
+   }
+
+   /* Confirm oNCurr is last node of pcPath */
+   if(Path_comparePath(Node_getPath(oNCurr), oPPath) != 0){
+      Path_free(oPPath);
+      return NULL;
+   }
+
+   if(Node_type(oNCurr) == FALSE){
+      *pbIsFile = TRUE;
+   }
+   else{
+      *pbIsFile = FALSE;
+   }
+   *pulSize = Node_len(oNCurr);
 }
 
 /*--------------------------------------------------------------------*/
