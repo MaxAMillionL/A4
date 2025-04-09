@@ -202,7 +202,7 @@ int FT_insertDir(const char *pcPath) {
 
    /* no ancestor node found, so if root is not NULL,
       pcPath isn't underneath root. */
-   if(oNCurr == NULL && != NULL) {
+   if(oNCurr == NULL && oNRoot != NULL) {
       Path_free(oPPath);
       return CONFLICTING_PATH;
    }
