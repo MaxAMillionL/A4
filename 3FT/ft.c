@@ -564,7 +564,7 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
    assert(pcPath != NULL);
 
    /* Defensive copy */
-   iStatus = Path_dup(pcPath, oPPath);
+   iStatus = Path_dup(pcPath, &oPPath);
    if(iStatus != SUCCESS)
    {
       Path_free(oPPath);
