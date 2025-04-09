@@ -480,7 +480,7 @@ void *FT_getFileContents(const char *pcPath){
    }
 
    /* Store last node of pcPath into oNCurr*/
-   iStatus = FT_traversePath(pcPath, oNCurr);
+   iStatus = FT_traversePath(oPPath, oNCurr);
    if(iStatus != SUCCESS)
    {
       Path_free(oPPath);
@@ -526,7 +526,7 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
       }
    
       /* Store last node of pcPath into oNCurr*/
-      iStatus = FT_traversePath(pcPath, oNCurr);
+      iStatus = FT_traversePath(oPPath, oNCurr);
       if(iStatus != SUCCESS)
       {
          Path_free(oPPath);
