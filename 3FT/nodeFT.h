@@ -119,7 +119,7 @@ void* Node_data(Node_T oNNode);
 /*
    Takes the data information from newData and changes oNNode's data to match.
 */
-void Node_changeData(Node_T oNNode, void* newData)
+void Node_changeData(Node_T oNNode, void* newData);
 
 
 
