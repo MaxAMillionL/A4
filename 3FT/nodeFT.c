@@ -22,7 +22,7 @@ struct node {
    void * filecontents;
    /* length of the file */
    size_t length;
-   /* FALSE for file, TRUE for directory */
+   /* TRUE for file, FALSE for directory */
    boolean nodetype;
 };
 
@@ -37,7 +37,7 @@ static int Node_addChild(Node_T oNParent, Node_T oNChild,
    assert(oNParent != NULL);
    assert(oNChild != NULL);
 
-   if(oNParent->nodetype == FALSE){
+   if(oNParent->nodetype == TRUE){
       return NOT_A_DIRECTORY;
    }
 
@@ -151,7 +151,7 @@ int Node_newDir(Path_T oPPath, Node_T oNParent, Node_T *poNResult) {
       *poNResult = NULL;
       return MEMORY_ERROR;
    }
-   psNew->nodetype = TRUE; 
+   psNew->nodetype = FALSE; 
    psNew->filecontents = NULL;
    psNew->length = 0;
 
@@ -249,7 +249,7 @@ int Node_newFile(Path_T oPPath, Node_T oNParent, Node_T *poNResult, void* conten
       *poNResult = NULL;
       return MEMORY_ERROR;
    }
-   psNew->nodetype = FALSE; /* add parameter for yp*/
+   psNew->nodetype = TRUE; /* add parameter for yp*/
    psNew->filecontents = contents;
    psNew->length = ulLength;
 

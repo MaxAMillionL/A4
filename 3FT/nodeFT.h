@@ -101,7 +101,7 @@ int Node_compare(Node_T oNFirst, Node_T oNSecond);
 char *Node_toString(Node_T oNNode);
 
 /*
-   Returns the type of the given node oNNode, FALSE for a file and TRUE for a directory
+   Returns the type of the given node oNNode, TRUE for a file and FALSE for a directory
 */
 boolean Node_type(Node_T oNNode);
 

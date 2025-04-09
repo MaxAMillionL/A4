@@ -195,7 +195,7 @@ int FT_insertDir(const char *pcPath) {
    }
    
    /* check to see if oNCurr is a file */
-   if(oNCurr != NULL && Node_type(oNCurr) == FALSE) {
+   if(oNCurr != NULL && Node_type(oNCurr) == TRUE) {
       Path_free(oPPath);
       return NOT_A_DIRECTORY;
    }
@@ -277,7 +277,7 @@ boolean FT_containsDir(const char *pcPath) {
    iStatus = FT_findNode(pcPath, &oNFound);
 
    /* makes sure the node exists and is a directory */
-   return (boolean) (iStatus == SUCCESS) && (Node_type(oNFound) == TRUE);
+   return (boolean) (iStatus == SUCCESS) && (Node_type(oNFound) == FALSE);
 }
 
 /*--------------------------------------------------------------------*/
@@ -294,7 +294,7 @@ int FT_rmDir(const char *pcPath) {
    if(iStatus != SUCCESS)
        return iStatus;
 
-   if(Node_type(oNFound) == FALSE){
+   if(Node_type(oNFound) == TRUE){
       return NOT_A_DIRECTORY;
    }
 
@@ -340,7 +340,7 @@ int FT_insertFile(const char *pcPath, void *pvContents,
    }
    
    /* check to see if oNCurr is a file */
-   if(oNCurr != NULL && Node_type(oNCurr) == FALSE) {
+   if(oNCurr != NULL && Node_type(oNCurr) == TRUE) {
       Path_free(oPPath);
       return NOT_A_DIRECTORY;
    }
@@ -431,7 +431,7 @@ boolean FT_containsFile(const char *pcPath) {
    iStatus = FT_findNode(pcPath, &oNFound);
 
    /* makes sure the node exists and is a directory */
-   return (boolean) (iStatus == SUCCESS) && (Node_type(oNFound) == FALSE);
+   return (boolean) (iStatus == SUCCESS) && (Node_type(oNFound) == TRUE);
 }
 
 /*--------------------------------------------------------------------*/
@@ -448,7 +448,7 @@ int FT_rmFile(const char *pcPath) {
    if(iStatus != SUCCESS)
        return iStatus;
 
-   if(Node_type(oNFound) == TRUE){
+   if(Node_type(oNFound) == FALSE){
       return NOT_A_FILE;
    }
 
@@ -486,7 +486,7 @@ void *FT_getFileContents(const char *pcPath){
    }
 
    /* Make sure oNCurr is not a directory*/
-   if(Node_type(oNCurr) == TRUE){
+   if(Node_type(oNCurr) == FALSE){
       Path_free(oPPath);
       return NULL;
    }
@@ -530,7 +530,7 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
       }
    
       /* Make sure oNCurr is not a directory*/
-      if(Node_type(oNCurr) == TRUE){
+      if(Node_type(oNCurr) == FALSE){
          Path_free(oPPath);
          return NULL;
       }
@@ -562,7 +562,7 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
    if(iStatus != SUCCESS)
    {
       Path_free(oPPath);
-      return NULL;
+      return MEMORY_ERROR;
    }
 
    /* Store last node of pcPath into oNCurr*/
@@ -570,11 +570,11 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
    if(iStatus != SUCCESS)
    {
       Path_free(oPPath);
-      return NULL;
+      return MEMORY_ERROR;
    }
 
    /* Make sure oNCurr is not a directory*/
-   if(Node_type(oNCurr) == TRUE){
+   if(Node_type(oNCurr) == FALSE){
       Path_free(oPPath);
       return NULL;
    }
@@ -585,13 +585,11 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
       return NULL;
    }
 
-   if(Node_type(oNCurr) == FALSE){
-      *pbIsFile = TRUE;
-   }
-   else{
-      *pbIsFile = FALSE;
-   }
+   *pbIsFile = Node_type(oNCurr);
+
    *pulSize = Node_len(oNCurr);
+
+   return SUCCESS;
 }
 
 /*--------------------------------------------------------------------*/
