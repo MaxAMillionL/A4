@@ -82,7 +82,6 @@ int Node_newDir(Path_T oPPath, Node_T oNParent, Node_T *poNResult) {
    int iStatus;
 
    assert(oPPath != NULL);
-   assert(oNParent == NULL);
 
    /* allocate space for a new node */
    psNew = malloc(sizeof(struct node));
@@ -152,7 +151,7 @@ int Node_newDir(Path_T oPPath, Node_T oNParent, Node_T *poNResult) {
       *poNResult = NULL;
       return MEMORY_ERROR;
    }
-   psNew->nodetype = TRUE; /* add parameter for yp*/
+   psNew->nodetype = TRUE; 
    psNew->filecontents = NULL;
    psNew->length = 0;
 
@@ -183,7 +182,6 @@ int Node_newFile(Path_T oPPath, Node_T oNParent, Node_T *poNResult, void* conten
    int iStatus;
 
    assert(oPPath != NULL);
-   assert(oNParent == NULL);
 
    /* allocate space for a new node */
    psNew = malloc(sizeof(struct node));
