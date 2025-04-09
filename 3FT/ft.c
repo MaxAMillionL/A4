@@ -75,6 +75,9 @@ static int FT_traversePath(Path_T oPPath, Node_T *poNFurthest) {
       *poNFurthest = NULL;
       return CONFLICTING_PATH;
    }
+
+
+
    Path_free(oPPrefix);
    oPPrefix = NULL;
 
@@ -348,7 +351,7 @@ int FT_insertFile(const char *pcPath, void *pvContents,
    ulDepth = Path_getDepth(oPPath);
    if(oNCurr == NULL){ /* new root! */
       ulIndex = 1;
-      return BAD_PATH;
+      return CONFLICTING_PATH;
    }
    else {
       ulIndex = Path_getDepth(Node_getPath(oNCurr))+1;
