@@ -583,9 +583,13 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
       return NO_SUCH_PATH;
    }
 
-   *pbIsFile = Node_type(oNCurr);
+   /* If it is a directory, do not change pulSize */
+   if(Node_type(oNCurr) == TRUE){
+      *pulSize = Node_len(oNCurr);
+   }
 
-   *pulSize = Node_len(oNCurr);
+   *pbIsFile = Node_type(oNCurr);
+   
 
    return SUCCESS;
 }
