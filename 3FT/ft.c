@@ -557,6 +557,10 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
 
    assert(pcPath != NULL);
 
+   if(!bIsInitialized){
+      return INITIALIZATION_ERROR;
+   }
+
    /* Defensive copy */
    iStatus = Path_new(pcPath, &oPPath);
    if(iStatus != SUCCESS)
