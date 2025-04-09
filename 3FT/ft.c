@@ -195,7 +195,7 @@ int FT_insertDir(const char *pcPath) {
    }
    
    /* check to see if oNCurr is a file */
-   if(Node_type(oNCurr) == FALSE) {
+   if(oNCurr != NULL && Node_type(oNCurr) == FALSE) {
       Path_free(oPPath);
       return NOT_A_DIRECTORY;
    }
@@ -340,7 +340,7 @@ int FT_insertFile(const char *pcPath, void *pvContents,
    }
    
    /* check to see if oNCurr is a file */
-   if(Node_type(oNCurr) == FALSE) {
+   if(oNCurr != NULL && Node_type(oNCurr) == FALSE) {
       Path_free(oPPath);
       return NOT_A_DIRECTORY;
    }
