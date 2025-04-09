@@ -467,40 +467,36 @@ void *FT_getFileContents(const char *pcPath){
    Node_T oNCurr;
    size_t ulDepth;
    size_t ulIndex;
-   Path_T oPPath;
+   /*Path_T oPPath;*/
 
    assert(pcPath != NULL);
 
-   /* Defensive copy */
+   /* Defensive copy 
    iStatus = Path_dup(pcPath, oPPath);
    if(iStatus != SUCCESS)
    {
       Path_free(oPPath);
       return NULL;
-   }
+   }*/
 
    /* Store last node of pcPath into oNCurr*/
    iStatus = FT_traversePath(pcPath, oNCurr);
    if(iStatus != SUCCESS)
    {
-      Path_free(oPPath);
       return NULL;
    }
 
    /* Make sure oNCurr is not a directory*/
    if(Node_type(oNCurr) == TRUE){
-      Path_free(oPPath);
       return NULL;
    }
 
    /* Confirm oNCurr is last node of pcPath */
-   if(Path_comparePath(Node_getPath(oNCurr), oPPath) != 0){
-      Path_free(oPPath);
+   if(Path_comparePath(Node_getPath(oNCurr), pcPath) != 0){
       return NULL;
    }
 
    /* Need to access oNCurrs contents*/
-   Path_free(oPPath);
    return Node_data(oNCurr);
 }
 
@@ -513,40 +509,27 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
       Node_T oNCurr;
       size_t ulDepth;
       size_t ulIndex;
-      Path_T oPPath;
    
       assert(pcPath != NULL);
-   
-      /* Defensive copy */
-      iStatus = Path_dup(pcPath, oPPath);
-      if(iStatus != SUCCESS)
-      {
-         Path_free(oPPath);
-         return NULL;
-      }
    
       /* Store last node of pcPath into oNCurr*/
       iStatus = FT_traversePath(pcPath, oNCurr);
       if(iStatus != SUCCESS)
       {
-         Path_free(oPPath);
          return NULL;
       }
    
       /* Make sure oNCurr is not a directory*/
       if(Node_type(oNCurr) == TRUE){
-         Path_free(oPPath);
          return NULL;
       }
    
       /* Confirm oNCurr is last node of pcPath */
-      if(Path_comparePath(Node_getPath(oNCurr), oPPath) != 0){
-         Path_free(oPPath);
+      if(Path_comparePath(Node_getPath(oNCurr), pcPath) != 0){
          return NULL;
       }
    
       /* Need to access oNCurrs contents*/
-      Path_free(oPPath);
       oldContents = Node_data(oNCurr);
       Node_changeData(oNCurr, pvNewContents, ulNewLength);
 }
