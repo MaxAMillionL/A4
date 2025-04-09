@@ -518,7 +518,7 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
       assert(pcPath != NULL);
    
       /* Defensive copy */
-      iStatus = Path_new(pcPath, oPPath);
+      iStatus = Path_new(oPPath, oPPath);
       if(iStatus != SUCCESS)
       {
          Path_free(oPPath);
@@ -572,7 +572,7 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
    }
 
    /* Store last node of pcPath into oNCurr*/
-   iStatus = FT_traversePath(pcPath, oNCurr);
+   iStatus = FT_traversePath(oPPath, oNCurr);
    if(iStatus != SUCCESS)
    {
       Path_free(oPPath);
