@@ -168,8 +168,6 @@ int Node_newDir(Path_T oPPath, Node_T oNParent, Node_T *poNResult) {
 
    *poNResult = psNew;
 
-   assert(oNParent == NULL);
-
    return SUCCESS;
 }
 
@@ -267,8 +265,6 @@ int Node_newFile(Path_T oPPath, Node_T oNParent, Node_T *poNResult, void* conten
    }
 
    *poNResult = psNew;
-
-   assert(oNParent == NULL);
 
    return SUCCESS;
 }
