@@ -202,7 +202,7 @@ int FT_insertDir(const char *pcPath) {
 
    /* no ancestor node found, so if root is not NULL,
       pcPath isn't underneath root. */
-   if(oNCurr == NULL && oNRoot != NULL) {
+   if(oNCurr == NULL && != NULL) {
       Path_free(oPPath);
       return CONFLICTING_PATH;
    }
@@ -472,7 +472,7 @@ void *FT_getFileContents(const char *pcPath){
    assert(pcPath != NULL);
 
    /* Defensive copy */
-   iStatus = Path_new(pcPath, oPPath);
+   iStatus = Path_new(pcPath, &oPPath);
    if(iStatus != SUCCESS)
    {
       Path_free(oPPath);
@@ -518,7 +518,7 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
       assert(pcPath != NULL);
    
       /* Defensive copy */
-      iStatus = Path_new(oPPath, oPPath);
+      iStatus = Path_new(oPPath, &oPPath);
       if(iStatus != SUCCESS)
       {
          Path_free(oPPath);
