@@ -514,7 +514,7 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
       assert(pcPath != NULL);
    
       /* Defensive copy */
-      iStatus = Path_new(oPPath, &oPPath);
+      iStatus = Path_new(pcPath, &oPPath);
       if(iStatus != SUCCESS)
       {
          Path_free(oPPath);
@@ -545,20 +545,20 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
       Path_free(oPPath);
       oldContents = Node_data(oNCurr);
       Node_changeData(oNCurr, pvNewContents, ulNewLength);
+      return oldContents;
 }
 
 /*--------------------------------------------------------------------*/
 
 int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
    int iStatus;
-   void* oldContents;
    Node_T oNCurr;
    Path_T oPPath;
 
    assert(pcPath != NULL);
 
    /* Defensive copy */
-   iStatus = Path_dup(pcPath, &oPPath);
+   iStatus = Path_new(pcPath, &oPPath);
    if(iStatus != SUCCESS)
    {
       Path_free(oPPath);
