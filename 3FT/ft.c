@@ -465,8 +465,6 @@ int FT_rmFile(const char *pcPath) {
 void *FT_getFileContents(const char *pcPath){
    int iStatus;
    Node_T oNCurr;
-   size_t ulDepth;
-   size_t ulIndex;
    Path_T oPPath;
 
    assert(pcPath != NULL);
@@ -511,8 +509,6 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
       int iStatus;
       void* oldContents;
       Node_T oNCurr;
-      size_t ulDepth;
-      size_t ulIndex;
       Path_T oPPath;
    
       assert(pcPath != NULL);
@@ -557,8 +553,6 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
    int iStatus;
    void* oldContents;
    Node_T oNCurr;
-   size_t ulDepth;
-   size_t ulIndex;
    Path_T oPPath;
 
    assert(pcPath != NULL);
