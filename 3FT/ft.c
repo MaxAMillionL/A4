@@ -580,7 +580,7 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
    /* Confirm oNCurr is last node of pcPath */
    if(Path_comparePath(Node_getPath(oNCurr), oPPath) != 0){
       Path_free(oPPath);
-      return NULL;
+      return NO_SUCH_PATH;
    }
 
    *pbIsFile = Node_type(oNCurr);
