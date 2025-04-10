@@ -647,6 +647,8 @@ static size_t FT_preOrderTraversal(Node_T n, DynArray_T d, size_t i) {
    if(n != NULL) {
       (void) DynArray_set(d, i, n);
       i++;
+
+      /* Get all file children */
       for(c = 0; c < Node_getNumChildren(n); c++) {
          int iStatus;
          Node_T oNChild = NULL;
@@ -656,6 +658,8 @@ static size_t FT_preOrderTraversal(Node_T n, DynArray_T d, size_t i) {
             i = FT_preOrderTraversal(oNChild, d, i);
          }
       }
+
+      /* Get all directory children, and add them recursively */
       for(c = 0; c < Node_getNumChildren(n); c++) {
          int iStatus;
          Node_T oNChild = NULL;
