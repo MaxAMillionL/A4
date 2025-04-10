@@ -170,8 +170,15 @@ What warnings does critTer generate on your Part 3 code, and what are
 your disagreements with them? Copy the critTer warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
+      
+ft.c: line 312: medium priority:
+Do you want to validate 'pvContents' through an assert?
+   
+ft.c: line 508: medium priority:
+Do you want to validate 'pvNewContents' through an assert?
 
-
+For both of these errors the contents of a file, whether new or 
+the current file, can be NULL.
 
 ------------------------------------------------------------------------
 For each of the five faulty BDT implementations required by Step
