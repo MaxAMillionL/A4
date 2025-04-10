@@ -277,7 +277,7 @@ boolean FT_containsDir(const char *pcPath) {
    iStatus = FT_findNode(pcPath, &oNFound);
 
    /* makes sure the node exists and is a directory */
-   return (boolean) (iStatus == SUCCESS) && (Node_type(oNFound) == FALSE);
+   return (boolean) ((iStatus == SUCCESS) && (Node_type(oNFound) == FALSE));
 }
 
 /*--------------------------------------------------------------------*/
@@ -431,7 +431,7 @@ boolean FT_containsFile(const char *pcPath) {
    iStatus = FT_findNode(pcPath, &oNFound);
 
    /* makes sure the node exists and is a directory */
-   return (boolean) (iStatus == SUCCESS) && (Node_type(oNFound) == TRUE);
+   return (boolean) ((iStatus == SUCCESS) && (Node_type(oNFound) == TRUE));
 }
 
 /*--------------------------------------------------------------------*/
@@ -466,6 +466,8 @@ void *FT_getFileContents(const char *pcPath){
    int iStatus;
    Node_T oNCurr;
    Path_T oPPath;
+   oNCurr = NULL;
+   oPPath = NULL;
 
    assert(pcPath != NULL);
 
@@ -510,6 +512,8 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
       void* oldContents;
       Node_T oNCurr;
       Path_T oPPath;
+      oNCurr = NULL;
+      oPPath = NULL;
    
       assert(pcPath != NULL);
    
@@ -554,6 +558,8 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
    int iStatus;
    Node_T oNCurr;
    Path_T oPPath;
+   oNCurr = NULL;
+   oPPath = NULL;
 
    assert(pcPath != NULL);
 
