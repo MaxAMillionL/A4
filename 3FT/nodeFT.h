@@ -111,13 +111,13 @@ boolean Node_type(Node_T oNNode);
 boolean Node_len(Node_T oNNode);
 
 /*
-   Returns the data located in onNode only if it is a file.
+   Returns the data located in oNNode only if it is a file.
 */
 void* Node_data(Node_T oNNode);
 
 
 /*
-   Takes the data information from newData and changes oNNode's data to match.
+   Takes the data information from newData and changes oNNode's data to match newData and oNNode's length to match newLength.
 */
 void Node_changeData(Node_T oNNode, void* newData, size_t newLength);
 

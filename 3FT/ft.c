@@ -562,6 +562,8 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
    oPPath = NULL;
 
    assert(pcPath != NULL);
+   assert(pbIsFile != NULL);
+   assert(pulSize != NULL);
 
    if(!bIsInitialized){
       return INITIALIZATION_ERROR;
