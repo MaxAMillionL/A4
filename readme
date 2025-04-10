@@ -176,6 +176,12 @@ your disagreements with them? Copy the critTer warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
       
+nodeFT.c: line 174: medium priority:
+Do you want to validate 'contents' through an assert?
+
+nodeFT.c: line 397: medium priority:
+Do you want to validate 'newData' through an assert?
+   
 ft.c: line 312: medium priority:
 Do you want to validate 'pvContents' through an assert?
    
