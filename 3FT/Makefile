@@ -1,12 +1,9 @@
 #--------------------------------------------------------------------
-# Makefile for Assignment 4, Part 2
-# ft* targets are built using checkerDT
-# rules to build dtBad*.o and nodeBad*.o from source will fail
-# Author: Christopher Moretti
+# Makefile for Assignment 4, Part 3
+# Authors: Maxwell Lloyd and Venus Dinari
 #--------------------------------------------------------------------
 
 GCC = gcc217
-#GCC = gcc217m
 
 TARGETS = ft
 
