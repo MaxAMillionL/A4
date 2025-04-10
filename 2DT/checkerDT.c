@@ -57,6 +57,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *recurCount) {
    Node_T prevNode;
    Path_T currNodePath;
    Path_T prevNodePath;
+   prevNode = NULL;
 
    assert(recurCount != NULL);
 

@@ -155,7 +155,16 @@ disagreements with them? Copy the critTer warnings here, and express
 your disagreement after each warning. If there are no warnings, then
 write "None."
 
+checkerDT.c: line 86: low priority:
+This area is deeply nested at level 4, consider refactoring
 
+checkerDT.c: line 90: low priority:
+This area is deeply nested at level 4, consider refactoring
+
+
+It gives warnings that there is too much nesting in the for loop at the 
+location specified, but it is highly readable and curt if statements, 
+so we believe that they should stay.
 
 ------------------------------------------------------------------------
 What warnings does splint generate on your Part 3 code, and what are
