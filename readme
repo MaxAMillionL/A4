@@ -130,6 +130,9 @@ of c code and then debug it myself then just be given the object files.
 Student 2: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
+It was really fun I enjoyed the partner work and how it felt to collaborate on an assignment. It gave a lot of insight of how real software engineering is given such little info on some parts.
+
+I also relaly enjoyed how debugging heavy this assignment was it really helped me understand GDB. 
 
 
 ------------------------------------------------------------------------
@@ -146,6 +149,10 @@ What warnings does splint generate for Part 2's checker, and what are
 your disagreements with them? Copy the splint warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
+
+There are no errors from checkerdt's implementation. 
+
+The rest of the errors are a result of dtGood's implementation.
 
 
 
@@ -184,7 +191,7 @@ What warnings does critTer generate on your Part 3 code, and what are
 your disagreements with them? Copy the critTer warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
-      
+
 nodeFT.c: line 174: medium priority:
 Do you want to validate 'contents' through an assert?
 
