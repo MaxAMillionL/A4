@@ -132,7 +132,7 @@ Was it fun?
 
 It was really fun I enjoyed the partner work and how it felt to collaborate on an assignment. It gave a lot of insight of how real software engineering is given such little info on some parts.
 
-I also relaly enjoyed how debugging heavy this assignment was it really helped me understand GDB. 
+I also really enjoyed how debugging heavy this assignment was it really helped me understand GDB. 
 
 
 ------------------------------------------------------------------------
@@ -150,7 +150,7 @@ your disagreements with them? Copy the splint warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
 
-There are no errors from checkerdt's implementation. 
+There are no errors from checkerDT's implementation. 
 
 The rest of the errors are a result of dtGood's implementation.
 
@@ -180,7 +180,7 @@ express your disagreement after each warning. If there are no
 warnings, then write "None."
 
 For splint, there are errors about functions not being used despite 
-being defines. This is okay because they are a result of copying over 
+being defined. This is okay because they are a result of copying over 
 dtGood code and not implementing the functions directly in ft.c. They 
 may be useful to a programer on a later date, so they stay in.
 
@@ -204,8 +204,7 @@ Do you want to validate 'pvContents' through an assert?
 ft.c: line 508: medium priority:
 Do you want to validate 'pvNewContents' through an assert?
 
-For both of these errors the contents of a file, whether new or 
-the current file, can be NULL.
+For all of these errors, the contents of a file can be NULL.
 
 ------------------------------------------------------------------------
 For each of the five faulty BDT implementations required by Step
